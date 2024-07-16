@@ -52,6 +52,16 @@ jobs:
             npm_config_arch: arm64
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Build onnxruntime for riscv64
+        if: matrix.arch == 'riscv64'
+        run: |
+          git clone --recursive https://github.com/Microsoft/onnxruntime.git
+          cd onnxruntime
+          python3 -m pip install cmake
+          which cmake
+          ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --compile_no_warning_as_error --skip_submodule_sync --cmake_extra_defines CMAKE_OSX_ARCHITECTURES=RISCV64
+        shell: bash
+
       # 1. Check-out repository
       - name: Check-out repository
         uses: actions/checkout@v4
