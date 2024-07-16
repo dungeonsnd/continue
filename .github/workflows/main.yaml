@@ -59,7 +59,7 @@ jobs:
           cd onnxruntime
           python3 -m pip install cmake
           which cmake
-          ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --compile_no_warning_as_error --skip_submodule_sync --cmake_extra_defines CMAKE_OSX_ARCHITECTURES=RISCV64
+          ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --compile_no_warning_as_error --skip_submodule_sync --build_nodejs --cmake_extra_defines CMAKE_OSX_ARCHITECTURES=RISCV64
         shell: bash
 
       # 1. Check-out repository
