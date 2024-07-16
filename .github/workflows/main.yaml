@@ -35,6 +35,10 @@ jobs:
             arch: armhf
             npm_config_arch: arm
           - os: ubuntu-latest
+            platform: linux
+            arch: riscv64
+            npm_config_arch: riscv64
+          - os: ubuntu-latest
             platform: alpine
             arch: x64
             npm_config_arch: x64
@@ -188,6 +192,7 @@ jobs:
             linux-arm64/*.vsix
             linux-armhf/*.vsix
             linux-x64/*.vsix
+            linux-riscv64/*.vsix
             win32-x64/*.vsix
             win32-arm64/*.vsix
           token: ${{ secrets.CI_GITHUB_TOKEN }}
@@ -219,7 +224,7 @@ jobs:
       - name: Publish to VS Code Marketplace
         run: |
           cd extensions/vscode
-          npx vsce publish --packagePath ../../alpine-x64/*.vsix ../../darwin-arm64/*.vsix ../../darwin-x64/*.vsix ../../linux-arm64/*.vsix ../../linux-armhf/*.vsix ../../linux-x64/*.vsix ../../win32-x64/*.vsix ../../win32-arm64/*.vsix
+          npx vsce publish --packagePath ../../alpine-x64/*.vsix ../../darwin-arm64/*.vsix ../../darwin-x64/*.vsix ../../linux-arm64/*.vsix ../../linux-armhf/*.vsix ../../linux-x64/*.vsix ../../linux-riscv64/*.vsix ../../win32-x64/*.vsix ../../win32-arm64/*.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
 
@@ -228,7 +233,7 @@ jobs:
         continue-on-error: true
         run: |
           cd extensions/vscode
-          npx ovsx publish -p ${{ secrets.VSX_REGISTRY_TOKEN }} --packagePath ../../alpine-x64/*.vsix ../../darwin-arm64/*.vsix ../../darwin-x64/*.vsix ../../linux-arm64/*.vsix ../../linux-armhf/*.vsix ../../linux-x64/*.vsix ../../win32-x64/*.vsix ../../win32-arm64/*.vsix
+          npx ovsx publish -p ${{ secrets.VSX_REGISTRY_TOKEN }} --packagePath ../../alpine-x64/*.vsix ../../darwin-arm64/*.vsix ../../darwin-x64/*.vsix ../../linux-arm64/*.vsix ../../linux-armhf/*.vsix ../../linux-x64/*.vsix ../../linux-riscv64/*.vsix ../../win32-x64/*.vsix ../../win32-arm64/*.vsix
 
       # 4. Update the package.json version and push changes
       - name: Update version in package.json
